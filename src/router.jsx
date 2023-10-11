@@ -88,6 +88,7 @@ const router = createBrowserRouter([
   // },
 
 
+  // bài tập về Form
   // {
   //   path: '/',
   //   element: <FormRegister />
@@ -109,6 +110,7 @@ const router = createBrowserRouter([
     element: <FormEmail />
   }
 
+  
 
   // {
   //   path: '/computer',

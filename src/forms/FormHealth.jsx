@@ -17,6 +17,9 @@ const FormHealth = () => {
             address: '',
             phoneNumber: '',
             email: '',
+            sick: false,
+            couch: false,
+            breath: false,
         },
         resolver: yupResolver(schema)
     })
@@ -24,6 +27,8 @@ const FormHealth = () => {
     const onSubmitCallback = (values) => {
         console.log(values);
     }
+
+    console.log(errors);
 
     return (
         <div>
@@ -56,7 +61,7 @@ const FormHealth = () => {
                     render={({ field }) => {
                         return (
                             <div>
-                                <input {...field} type="number" placeholder="phone number" />
+                                <input {...field} type="tel" placeholder="phone number" />
                                 {errors['phoneNumber'] && <p>({errors.phoneNumber.message})</p>}
                             </div>
                         )
@@ -74,14 +79,40 @@ const FormHealth = () => {
                     }}
                 />
                 <p>Trong 14 ngày qua có dấu hiệu triệu chứng gì không?</p>
-                <input type="checkbox" />sốt
-                <br />
-                <input type="checkbox" />hắt hơi
-                <br />
-                <input type="checkbox" />sổ mũi
-                <br />
-                <input type="checkbox" />khó thở
-                <br />
+
+                <div>
+                <Controller name="sick" control={control}
+                    render={({ field }) => {
+                        return (
+                            <div>
+                                <input {...field} type="checkbox" />sốt
+                            </div>
+                        )
+                    }}
+                />
+                </div>
+                <div>
+                <Controller name="couch" control={control}
+                    render={({ field }) => {
+                        return (
+                            <div>
+                                <input {...field} type="checkbox" />sổ mũi
+                            </div>
+                        )
+                    }}
+                />
+                </div>
+                <div>
+                <Controller name="breath" control={control}
+                    render={({ field }) => {
+                        return (
+                            <div>
+                                <input {...field} type="checkbox" />khó thở
+                            </div>
+                        )
+                    }}
+                />
+                </div>
                 <button type="submit">Submit</button>
             </form>
         </div>

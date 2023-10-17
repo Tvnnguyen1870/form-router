@@ -14,13 +14,16 @@ import { createBrowserRouter } from 'react-router-dom'
 // import CheckMember from './components/CheckMember';
 // import Admin from './pages/Admin';
 // import ProductDetail from './pages/ProductDetail';
-// import Home from './pages/Home';
+import Home from './pages/Home';
+import Todo from './pages/Todo';
+import User from './pages/User';
+import Product from './pages/Product';
 // import Login from './pages/Login';
-import FormRegister from './forms/FormRegister';
-import Formik from './forms/Formik';
-import FormContact from './forms/FormContact';
-import FormHealth from './forms/FormHealth';
-import FormEmail from './forms/FormEmail';
+// import FormRegister from './forms/FormRegister';
+// import Formik from './forms/Formik';
+// import FormContact from './forms/FormContact';
+// import FormHealth from './forms/FormHealth';
+// import FormEmail from './forms/FormEmail';
 
 const router = createBrowserRouter([
   // bài tập thực hành 1
@@ -105,10 +108,10 @@ const router = createBrowserRouter([
   //   path: '/',
   //   element: <FormHealth />
   // }
-  {
-    path: '/',
-    element: <FormEmail />
-  }
+  // {
+  //   path: '/',
+  //   element: <FormEmail />
+  // }
 
   
 
@@ -139,6 +142,19 @@ const router = createBrowserRouter([
   //   element: <SearchParams />
   // },
   //-------------------------------------------------
+
+  {
+    path: '/todo',
+    element: <Todo />
+  },
+  {
+    path: '/user',
+    element: <User />
+  },
+  {
+    path: '/product',
+    element: <Product />
+  },
 
 ]);
 

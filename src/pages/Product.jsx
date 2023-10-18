@@ -57,29 +57,18 @@ const Product = () => {
                 <br />
                 <button type="submit">thêm</button>
             </form>
-            <ul>
-                {
-                    productStore.products.map((product, index) => {
-                        return <li key={index}>{product.productName}</li>
-                    })
-                }
-                {
-                    productStore.products.map((product, index) => {
-                        return <li key={index}>{product.price}</li>
-                    })
-                }
-                {
-                    productStore.products.map((product, index) => {
-                        return <li key={index}>{product.color}</li>
-                    })
-                }
-                {
-                    productStore.products.map((product, index) => {
-                        return <li key={index}>{product.describe}</li>
-                    })
-                }
-                
-            </ul>
+
+
+            <div>
+                <p>List sản phẩm :</p>
+                <div>
+                    {
+                        productStore.products.map((product, index) => (
+                            <p key={index}>{product.productName}-{product.price}-{product.color}-{product.describe}</p>
+                        ))
+                    }
+                </div>
+            </div>
 
         </div>
     )

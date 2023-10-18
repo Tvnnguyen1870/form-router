@@ -14,10 +14,12 @@ import { createBrowserRouter } from 'react-router-dom'
 // import CheckMember from './components/CheckMember';
 // import Admin from './pages/Admin';
 // import ProductDetail from './pages/ProductDetail';
-import Home from './pages/Home';
+// import Home from './pages/Home';
 import Todo from './pages/Todo';
 import User from './pages/User';
 import Product from './pages/Product';
+import PhoneBook from './pages/PhoneBook';
+import Student from './pages/Student';
 // import Login from './pages/Login';
 // import FormRegister from './forms/FormRegister';
 // import Formik from './forms/Formik';
@@ -154,6 +156,14 @@ const router = createBrowserRouter([
   {
     path: '/product',
     element: <Product />
+  },
+  {
+    path: '/phone',
+    element: <PhoneBook />
+  },
+  {
+    path: '/student',
+    element: <Student />
   },
 
 ]);

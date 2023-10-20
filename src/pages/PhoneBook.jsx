@@ -31,6 +31,10 @@ const PhoneBook = () => {
     dispatch(fetchPosts())
   }, [])
 
+  const handleData = () => {
+    dispatch(fetchPosts())
+  }
+
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -55,6 +59,9 @@ const PhoneBook = () => {
           )}
         />
         <div><button type="submit">Add</button></div>
+        <div>
+          <button onClick={handleData}>get all data</button>
+        </div>
       </form>
       <table>
         <thead>

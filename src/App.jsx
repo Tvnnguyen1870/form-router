@@ -9,7 +9,6 @@ function App() {
         router={router}
       >
       </RouterProvider>
-      
     </div>
   )
 }

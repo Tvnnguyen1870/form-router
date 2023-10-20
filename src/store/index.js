@@ -6,6 +6,9 @@ import articleReducer from './reducers/article'
 import productReducer from './reducers/product'
 import phonebookReducer from './reducers/phone'
 import studentReducer from './reducers/student'
+import thunkReducer from './reducers/thunk'
+import todolistReducer from './reducers/todolist'
+import bookReducer from './reducers/book'
 
 export const store = configureStore({
   reducer: {
@@ -16,5 +19,8 @@ export const store = configureStore({
     product: productReducer,
     phonebook: phonebookReducer,
     student: studentReducer,
+    thunk: thunkReducer,
+    todolist: todolistReducer,
+    book: bookReducer,
   },
 })

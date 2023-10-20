@@ -13,10 +13,11 @@ export const fetchPosts = createAsyncThunk(
         //call api
         const response = await fetch('https://jsonplaceholder.typicode.com/posts')
         const result = await response.json;
-
+        console.log(result);
         return result.slice(0, 10);
     }
 );
+
 
 export const addIdForPhone = createAsyncThunk(
     'phone/addIdForPhone',
@@ -36,12 +37,12 @@ export const phonebookSlice = createSlice({
             state.phonebooks = state.phonebooks.filter((phonebook) => phonebook.id !== action.payload)
         },
      },
-    extraReducers: (buider) => {
-        buider.addCase(fetchPosts.fulfilled, (state, action) => {
-            console.log(state, action);
+    extraReducers: (builder) => {
+        builder.addCase(fetchPosts.fulfilled, (state, action) => {
+            console.log({state, action});
             state.posts = action.payload;
         })
-        buider.addCase(addIdForPhone.fulfilled((state, action) => {
+        builder.addCase(addIdForPhone.fulfilled((state, action) => {
             state.phonebooks.push(action.payload);
         }))
     }

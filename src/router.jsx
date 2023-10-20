@@ -16,10 +16,13 @@ import { createBrowserRouter } from 'react-router-dom'
 // import ProductDetail from './pages/ProductDetail';
 // import Home from './pages/Home';
 import Todo from './pages/Todo';
-import User from './pages/User';
 import Product from './pages/Product';
 import PhoneBook from './pages/PhoneBook';
 import Student from './pages/Student';
+import Api from './redux/Api';
+import Thunk from './redux/Thunk';
+import TodoList from './redux/TodoList';
+import Book from './redux/Book';
 // import Login from './pages/Login';
 // import FormRegister from './forms/FormRegister';
 // import Formik from './forms/Formik';
@@ -149,10 +152,10 @@ const router = createBrowserRouter([
     path: '/todo',
     element: <Todo />
   },
-  {
-    path: '/user',
-    element: <User />
-  },
+  // {
+  //   path: '/user',
+  //   element: <User />
+  // },
   {
     path: '/product',
     element: <Product />
@@ -164,6 +167,22 @@ const router = createBrowserRouter([
   {
     path: '/student',
     element: <Student />
+  },
+  {
+    path: '/api',
+    element: <Api />
+  },
+  {
+    path: '/thunk',
+    element: <Thunk />
+  },
+  {
+    path: '/todolist',
+    element: <TodoList />
+  },
+  {
+    path: '/book',
+    element: <Book />
   },
 
 ]);

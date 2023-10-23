@@ -1,15 +1,15 @@
 import { Controller, useForm } from "react-hook-form"
 import { useDispatch, useSelector } from "react-redux";
-import { addUser, getListUser, removeUser } from "../store/reducers/thunk";
+import { addUser, editUser, getListUser, removeUser } from "../store/reducers/thunk";
 import { useEffect, useState } from "react";
 
-
 const Thunk = () => {
-  const [tempName, setTempName] = useState('');
 
-  const { control, handleSubmit } = useForm({
+  const [user, setUser] = useState();
+
+  const { control, handleSubmit, reset } = useForm({
     defaultValues: {
-      user: '',
+      userName: '',
     }
   });
 
@@ -18,47 +18,56 @@ const Thunk = () => {
   const dispatch = useDispatch();
 
   const onSubmit = (values) => {
-    setTempName(values)
-    dispatch(addUser(values))
+    if (user) {
+      dispatch(editUser({ ...values, name: user.userName }))
+    } else {
+      dispatch(addUser(values))
+    }
+
+    reset({
+      userName: '',
+    })
   }
 
   const onDelete = (values) => {
     dispatch(removeUser(values))
   }
 
-  const handleEdit =() => {
-    let tempHtml = `<input value=${tempName}/> <button onClick={onDelete}>xóa</button> <button onClick={handleEdit}>sửa</button>`;
-    document.getElementById('user').innerHTML = tempHtml;
-  }
-
   useEffect(() => {
     dispatch(getListUser());
   }, [])
 
-  // const handleEdit = () => 
-  //   return 
-  // 
+  useEffect(() => {
+    if (user) {
+      reset({
+        userName: user.userName,
+      })
+    }
+  }, [user])
 
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Controller name="user" control={control}
+        <Controller name="userName" control={control}
           render={({ field }) => (
-            <input {...field} type="text" placeholder="enter user" id="username" />
+            <input {...field} type="text" placeholder="enter user" />
           )}
         />
         <button type="submit">add user</button>
       </form>
-      <div id="formTemp">
-        <ul id="user">
-          {
-            thunkStore.thunks.map((thunk, index) => {
-              return <li key={index}>{thunk.user} <button onClick={onDelete}>xóa</button> <button onClick={()=>handleEdit(index)}>sửa</button></li>
-            })
-          }
-        </ul>
-      </div>
 
+      <ul id="user">
+        {
+          thunkStore.thunks.map((thunk, index) => {
+            return <li key={index}>{thunk.userName}
+              <div>
+                <button onClick={onDelete}>xóa</button>
+                <button onClick={() => setUser(thunk)}>Edit</button>
+              </div>
+            </li>
+          })
+        }
+      </ul>
     </div>
   )
 }

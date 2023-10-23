@@ -4,7 +4,6 @@ import axios from 'axios'
 const initialState = {
     thunks: [],
     users: [],
-    id: [],
 }
 
 export const getListUser = createAsyncThunk(
@@ -18,11 +17,9 @@ export const getListUser = createAsyncThunk(
                 var htmls = users.map(function(user){
                     return `<li>${user.name}</li>`
                 })
-
                 var html = htmls.join('');
                 document.getElementById('user').innerHTML = html;
             })
-
         return result;
     }
 )
@@ -46,9 +43,9 @@ export const thunkSlice = createSlice({
                 state.thunks.splice(index, 1);
             }
         },
-        userName: (state, action) => {
-            state.users.push(action.payload)
-        },
+        editUser: (state, action) => {
+            state.thunks.push(action.payload)
+        }
 
     },
     extraReducers: (builder) => {
@@ -59,7 +56,7 @@ export const thunkSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { addUser, removeUser, userName } = thunkSlice.actions;
+export const { addUser, removeUser, editUser } = thunkSlice.actions;
 
 const thunkReducer = thunkSlice.reducer;
 

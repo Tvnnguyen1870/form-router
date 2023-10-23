@@ -36,6 +36,14 @@ export const phonebookSlice = createSlice({
         removePhone: (state, action) => {
             state.phonebooks = state.phonebooks.filter((phonebook) => phonebook.id !== action.payload)
         },
+        editPhone: (state, action ) => {
+            const index = state.phonebooks.findIndex(
+                (phonebook) => phonebook.id === action.payload.id
+            )
+            if(index < 0) return;
+
+            state.phonebooks[index] = action.payload
+        }
      },
     extraReducers: (builder) => {
         builder.addCase(fetchPosts.fulfilled, (state, action) => {
@@ -49,7 +57,7 @@ export const phonebookSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { addPhone, removePhone } = phonebookSlice.actions;
+export const { addPhone, removePhone , editPhone} = phonebookSlice.actions;
 
 const phonebookReducer = phonebookSlice.reducer;
 

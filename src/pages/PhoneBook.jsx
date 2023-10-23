@@ -1,12 +1,14 @@
-import { Controller, useForm } from "react-hook-form"
-import {  addPhone, fetchPosts, removePhone } from "../store/reducers/phone"
-import { useDispatch, useSelector } from "react-redux"
+import { useEffect, useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from 'uuid';
-import { useEffect } from "react";
+import { addPhone, editPhone, fetchPosts, removePhone } from "../store/reducers/phone";
 
 const PhoneBook = () => {
 
-  const { control, handleSubmit } = useForm({
+  const [phonebook, setPhonebook] = useState();
+
+  const { control, handleSubmit, reset } = useForm({
     defaultValues: {
       userName: '',
       phoneNumber: '',
@@ -19,8 +21,19 @@ const PhoneBook = () => {
   const phoneBookStore = useSelector((state) => state.phonebook);
 
   const onSubmit = (values) => {
+
     const payload = { ...values, id: uuidv4() }
-    dispatch(addPhone(payload))
+    if (phonebook) {
+      dispatch(editPhone({...values, id: phonebook.id}))
+    } else {
+      dispatch(addPhone(payload))
+    }
+
+    reset({
+      userName: '',
+      phoneNumber: '',
+      isFavorite: true,
+    })
   }
 
   const onRemove = (id) => {
@@ -31,9 +44,15 @@ const PhoneBook = () => {
     dispatch(fetchPosts())
   }, [])
 
-  const handleData = () => {
-    dispatch(fetchPosts())
-  }
+  useEffect(() => {
+    if (phonebook) {
+      reset({
+        userName: phonebook.userName,
+        phoneNumber: phonebook.phoneNumber,
+        isFavorite: phonebook.isFavorite,
+      })
+    }
+  }, [phonebook])
 
   return (
     <div>
@@ -58,10 +77,7 @@ const PhoneBook = () => {
             </div>
           )}
         />
-        <div><button type="submit">Add</button></div>
-        <div>
-          <button onClick={handleData}>get all data</button>
-        </div>
+        <div><button type="submit">add</button></div>
       </form>
       <table>
         <thead>
@@ -81,7 +97,10 @@ const PhoneBook = () => {
                 <td>{phonebook.userName}</td>
                 <td>{phonebook.phoneNumber}</td>
                 <td>{phonebook.isFavorite.toString()}</td>
-                <td><button onClick={() => onRemove(phonebook.id)}>Remove</button></td>
+                <td>
+                  <button onClick={() => onRemove(phonebook.id)}>Remove</button>
+                  <button onClick={() => setPhonebook(phonebook)}>Edit</button>
+                </td>
               </tr>
             ))
           }

@@ -44,6 +44,9 @@ export const bookSlice = createSlice({
             if (index !== -1) {
                 state.books.splice(index, 1);
             }
+        },
+        editBook: (state, action) => {
+            state.books.push(action.payload)
         }
     },
     extraReducers: (builder) => {
@@ -54,7 +57,7 @@ export const bookSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { addBook , removeBook} = bookSlice.actions;
+export const { addBook , removeBook, editBook} = bookSlice.actions;
 
 const bookReducer = bookSlice.reducer;
 
